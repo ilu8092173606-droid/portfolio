@@ -4,6 +4,7 @@ import ProjectGallery from './ProjectGallery'
 import ScrollImageSequence from './ScrollImageSequence'
 import { projects, type Project } from '../data/projects'
 import { safeExternalUrl } from '../data/site'
+import { sitePath } from '../data/sitePath'
 import roboticArmImage from '../../../ezgif-30f3f90fa3907bb9-jpg/ezgif-frame-001.jpg'
 
 const roboticFrameModules = import.meta.glob('../../../ezgif-30f3f90fa3907bb9-jpg/*.jpg', { eager: true, query: '?url', import: 'default' }) as Record<string, string>
@@ -22,7 +23,7 @@ function ProjectNav({ project }: { project: Project }) {
   const current = projects.findIndex((item) => item.slug === project.slug)
   const previous = projects[(current - 1 + projects.length) % projects.length]
   const next = projects[(current + 1) % projects.length]
-  return <nav className="project-navigation" aria-label="Project navigation"><a href={`/projects/${previous.slug}`}>← <span>Previous Project</span>{previous.title}</a><a href={`/projects/${next.slug}`}><span>Next Project</span>{next.title} →</a></nav>
+  return <nav className="project-navigation" aria-label="Project navigation"><a href={sitePath(`/projects/${previous.slug}`)}>← <span>Previous Project</span>{previous.title}</a><a href={sitePath(`/projects/${next.slug}`)}><span>Next Project</span>{next.title} →</a></nav>
 }
 
 function GenericHero({ project }: { project: Project }) {
@@ -48,7 +49,7 @@ export default function ProjectPage({ project }: { project: Project }) {
   const githubUrl = safeExternalUrl(project.github || '')
   const liveDemoUrl = safeExternalUrl(project.liveDemo || '')
   return <main className={`project-page project-page--${project.theme}`}>
-    <div className="project-top"><a href="/">BK</a><nav aria-label="Breadcrumb"><a href="/">Home</a><span>/</span><a href="/#projects">Projects</a><span>/</span><strong>{project.title}</strong></nav></div>
+    <div className="project-top"><a href={sitePath()}>BK</a><nav aria-label="Breadcrumb"><a href={sitePath()}>Home</a><span>/</span><a href={`${sitePath()}#projects`}>Projects</a><span>/</span><strong>{project.title}</strong></nav></div>
     {isRobot ? <ScrollImageSequence frames={roboticFrames} fallback={roboticArmImage} label={project.title} /> : <GenericHero project={project} />}
     <div className="project-content">
       <section className="project-intro reveal"><div><p className="section-label">01 — The Project</p><p className="project-status">Current status: {project.status}</p><h2>{project.title}</h2><p>{project.overview}</p></div><ProjectMedia imageSrc={isRobot ? roboticArmImage : project.imageSrc} alt={`${project.title} project media`} /></section>

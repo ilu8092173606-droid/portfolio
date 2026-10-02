@@ -1,4 +1,5 @@
 import { projects, type Project, type ProjectTheme } from '../data/projects'
+import { sitePath } from '../data/sitePath'
 
 const groups: { title: string; description: string; themes: ProjectTheme[]; accent: string }[] = [
   { title: 'AI / Generative AI', description: 'Assistants and generative workflows under active development.', themes: ['ai'], accent: 'var(--blue)' },
@@ -22,7 +23,7 @@ function ProjectCard({ project, accent }: { project: Project; accent: string }) 
     <div className="project-card__body">
       <h3>{project.title}</h3><p>{project.shortDescription}</p>
       <div className="project-card__tags">{project.technologies.slice(0, 5).map((item) => <span className="tech-tag" key={item}>{item}</span>)}</div>
-      <a href={`/projects/${project.slug}`} className="btn-ghost">View project <span aria-hidden="true">→</span></a>
+      <a href={sitePath(`/projects/${project.slug}`)} className="btn-ghost">View project <span aria-hidden="true">→</span></a>
     </div>
   </article>
 }
