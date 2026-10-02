@@ -1,0 +1,11 @@
+{
+  "title": "Bittu Kumar — AI + Robotics + Technology Generalist",
+  "description": "Bittu Kumar's portfolio: AI, automation, robotics, embedded systems, web applications and creative technology.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}

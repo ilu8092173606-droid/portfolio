@@ -1,0 +1,7 @@
+Options -Indexes
+<FilesMatch "^config\.php(?:\.example)?$">
+  Require all denied
+</FilesMatch>
+<FilesMatch "^(?:auth-attempts\.json|\.admin-config-.*|.*\.tmp)$">
+  Require all denied
+</FilesMatch>
